@@ -7,22 +7,20 @@ def pause(message):
     time.sleep(2)
 
 
-def valid_input(question, right, left):
+def valid_input(prompt="", ErrorMessage=None):
     while True:
-        response = input(question).lower()
-        if right in response:
-            break
-        if left in response:
-            break
-        else:
-            pause("Sorry, I don't understand.")
+        try:
+            response = input(prompt).lower()
+        except:
+            pause(ErrorMessage or "Inalid Input. Try Again.")
     return response
 
 
 def random_parts():
     scenarios = ["A deer runs in the road, you to swerve into the trees.",
                  "A bear throws your car into some bushes,",
-                 "You were texting and driving. You swerve off the road",]
+                 "You were texting and driving. You swerve off the road",
+                 ]
     print(random.choice(scenarios))
 
 
@@ -55,23 +53,30 @@ def going_left():
 
 
 def decisions():
-    response=valid_input("Please choose a direction.",
-                          "Will you go left or right?")
+    response = valid_input( prompt = "Will you go left or right?",
+                            ErrorMessage = "Please Enter Left or Right")
     if right in response:
         print(going_right())
     elif left in response:
         print(going_left())
-    pause("Game Over")
+        pause("Game Over")
+    else:
+        print(ErrorMessage)
+        return response
 
 
 def play_again():
-    response=valid_input("Do you want to play again?",
-                          "Please say yes or no")
+    response = valid_input(Prompt = ("Do you want to play again?",
+                           "Please say yes or no"),
+                           ErrorMessage = "Not Valid, Please enter yes or no.")
     if no in response:
         pause("OK, Bye!")
     elif yes in response:
         pause("Yay, Let's play!")
-        decisions()
+        intro()
+    else:
+        print(ErrorMessage)
+        return response
 
 
 def Game():
