@@ -20,10 +20,9 @@ def valid_input(question, right, left):
 
 
 def random_parts():
-    scenarios = [("A deer runs in the road, you to swerve into the trees."),
-                 ("A bear throws your car into some bushes,")
-                 ("You were texting and driving.")
-                  ("You drive into a clearing hitting a big rock.")]
+    scenarios = ["A deer runs in the road, you to swerve into the trees.",
+                 "A bear throws your car into some bushes,",
+                 "You were texting and driving. You swerve off the road",]
     print(random.choice(scenarios))
 
 
@@ -77,6 +76,6 @@ def play_again():
 
 def Game():
     intro()
-    descisions()
+    decisions()
     play_again()
 Game()
