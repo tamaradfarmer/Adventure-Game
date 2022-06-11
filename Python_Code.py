@@ -7,12 +7,15 @@ def pause(message):
     time.sleep(2)
 
 
-def valid_input(prompt="", ErrorMessage=None):
+def valid_input(option1, option2, prompt, ErrorMessage,):
     while True:
-        try:
-            response = input(prompt).lower()
-        except:
-            pause(ErrorMessage or "Inalid Input. Try Again.")
+        response = input(prompt).lower()
+        if option1 in response:
+            break
+        if option2 in response:
+            break
+        else:
+            pause(ErrorMessage)
     return response
 
 
@@ -53,11 +56,12 @@ def going_left():
 
 
 def decisions():
-    response = valid_input( prompt = "Will you go left or right?",
-                            ErrorMessage = "Please Enter Left or Right")
-    if right in response:
+    response = valid_input( "right", "left",
+                            prompt = "Will you go left or right?",
+                            ErrorMessage ="Please Enter Left or Right")
+    if "right" in response:
         print(going_right())
-    elif left in response:
+    elif "left" in response:
         print(going_left())
         pause("Game Over")
     else:
@@ -66,14 +70,15 @@ def decisions():
 
 
 def play_again():
-    response = valid_input(Prompt = ("Do you want to play again?",
-                           "Please say yes or no"),
-                           ErrorMessage = "Not Valid, Please enter yes or no.")
-    if no in response:
+    response = valid_input("yes", "no",
+                            prompt = "Do you want to play again?",
+                           ErrorMessage = "Not Valid, Please enter yes or no.",
+                           )
+    if "no" in response:
         pause("OK, Bye!")
-    elif yes in response:
+    elif "yes" in response:
         pause("Yay, Let's play!")
-        intro()
+        Game()
     else:
         print(ErrorMessage)
         return response
